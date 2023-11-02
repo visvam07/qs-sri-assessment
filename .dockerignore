@@ -1,0 +1,11 @@
+# .dockerignore
+
+node_modules
+npm-debug.log
+
+
+# Ignore all Terraform files
+*.tf
+*.tfstate
+*.tfvars
+.terraform/
