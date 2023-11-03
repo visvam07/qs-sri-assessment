@@ -86,7 +86,7 @@ Within this directory are all Terraform-related configurations, dedicated to pro
         ```bash
         terraform output ecr_image_uri
         ```
-      Reference this value as the `image` in `.aws/task-definition.json`.
+      Use this value for the `image` in `.aws/task-definition.json`.
 
     - **Task IAM Role ARN**: 
         ```bash
@@ -98,7 +98,7 @@ Within this directory are all Terraform-related configurations, dedicated to pro
         ```bash
         terraform output task_exec_iam_role_arn
         ```
-      Reference this ARN for the `executionRoleArn` in `.aws/task-definition.json`.
+      Use this ARN for the `executionRoleArn` in `.aws/task-definition.json`.
 
     - **ALB DNS Name**: 
         ```bash
@@ -128,4 +128,18 @@ The application deployment leverages GitHub Actions, streamlining the processes 
 
 - AWS ECS hosts a singular service and task, fitting for the application's simplicity. This task, responsible for running the container, boasts an auto-scaling feature, allowing it to scale anywhere between 2 and 100 tasks, depending on demand.
   
-- Cost efficiency is paramount. As such, Fargate spot instances have been employed, translating to potential cost savings of up to 70%.
+- To build a cost optimised deployment, Fargate spot instances have been employed, translating to potential cost savings of up to 70%.
+
+- An application load balancer is used which will automatically perform health checks on the tasks deployed and only route traffic to the healthy ones.
+
+- Multi AZ deployment is performed to ensure the application is highly available even if one AZ goes down.
+
+## Future enhancement possibilities
+
+- Some of the data(ex: cpu) is static within terraform code. They can be used as variables.
+
+- Terraform code is divided into 4 stages: Compute, IAM, Networking and Storage. Networking and Storage aren't used at this stage. But This level of seperation gives code maintainability and reusability.
+
+- Only dev environment is setup. We can use workspaces aswell. But we can also use seperate project files within the environment for staging and prod environments.
+
+- The code is auto deployed when it is pushed to main branch. Pipelines can be setup for dev and staging branches as well.
