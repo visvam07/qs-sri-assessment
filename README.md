@@ -143,3 +143,5 @@ The application deployment leverages GitHub Actions, streamlining the processes 
 - Only dev environment is setup. We can use workspaces aswell. But we can also use seperate project files within the environment for staging and prod environments.
 
 - The code is auto deployed when it is pushed to main branch. Pipelines can be setup for dev and staging branches as well.
+
+- Monitoring and logging is also very important to ensure an application is highly available.
