@@ -20,6 +20,34 @@ This directory houses all the application-related code, including the core logic
 ### `terraform/`
 Within this directory are all Terraform-related configurations, dedicated to provisioning and managing the cloud infrastructure required to run the application.
 
+## Prerequisites
+
+Before you begin, ensure you have the following prerequisites set up:
+
+- AWS CLI installed and configured with an appropriate profile.
+- Terraform CLI installed on your machine.
+
+Make sure to configure your AWS credentials using the AWS CLI or set up the necessary environment variables. If using a profile, ensure it is correctly configured in your AWS credentials file, typically located at `~/.aws/credentials`.
+
+## AWS Provider Configuration
+
+The Terraform code is configured to use a specific AWS profile to manage authentication. This allows you to keep your AWS access organized and secure. To use the profile with Terraform, you can set it in your AWS provider configuration block or export it as an environment variable. Here is an example:
+
+```hcl
+provider "aws" {
+  region  = "us-west-2"
+  profile = "your-profile-name" # Replace with your AWS profile name
+}
+```
+
+Alternatively, set the profile as an environment variable before running Terraform commands:
+
+```bash
+export AWS_PROFILE=your-profile-name # Replace with your AWS profile name
+```
+
+Ensure the profile has the necessary permissions to create and manage the AWS resources as defined in the Terraform configurations.
+
 ## Getting Started
 
 ### Setting up the GitHub User with Terraform
